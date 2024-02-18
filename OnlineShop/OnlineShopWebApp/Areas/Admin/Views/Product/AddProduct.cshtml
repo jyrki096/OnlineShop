@@ -1,0 +1,64 @@
+﻿@model ProductViewModel
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="my-4">
+            @await Html.PartialAsync("LeftMenu")
+        </div>
+    </div>
+
+    <div class="col-lg-9 my-4">
+        <form method="post" enctype="multipart/form-data">
+            <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+            <div class="col-12 g-3">
+                <h4 class="bg-warning-subtle text-emphasis-warning">Добавление товара</h4>
+                <div class="col-9 my-3">
+                    <label asp-for="Name">Название</label>
+                    <input asp-for="Name" class="form-control"/>
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="Type">Тип</label>
+                    <input asp-for="Type" class="form-control"/>
+                </div>
+                <div class="col-9 my-3">
+                    <label>Загрузить изображение</label>
+                    <input type="file" name="UpFiles" class="form-control" multiple accept="image/*">
+                </div>
+                <div class="col-9 my-3">
+                    <label asp-for="Cost">Цена</label>
+                    <input asp-for="Cost" class="form-control" />
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="@Model.Description">Описание</label>
+                    <textarea asp-for="@Model.Description" class="form-control"></textarea>
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="Characteristics.Color">Цвет</label>
+                    <input type="text" asp-for="Characteristics.Color" class="form-control" />
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="Characteristics.Polyphony">Полифония</label>
+                    <input type="text" asp-for="Characteristics.Polyphony" class="form-control"/>
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="Characteristics.Timbers">Тембры</label>
+                    <input type="text" asp-for="Characteristics.Timbers" class="form-control" />
+                </div>
+                <div class="col-9 my-3">
+                    <label asp-for="Characteristics.Power">Мощность</label>
+                    <input type="text" asp-for="Characteristics.Power" class="form-control" />
+                </div>
+
+                <div class="col-9 my-3">
+                    <button class="btn btn-info" type="submit" asp-area="Admin" asp-controller="Product" asp-action="AddProduct">Добавить</button>
+                    <a class="btn btn-outline-danger" asp-area="Admin" asp-controller="Product" asp-action="GetProducts">Отмена</a>
+                </div>
+        </form>
+    </div>
+</div>
+

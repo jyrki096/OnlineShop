@@ -1,0 +1,52 @@
+﻿@model List<ProductViewModel>;
+
+<div class="row">
+	<div class="col-lg-12 my-4">
+		@if (Model is null || !Model.Any())
+		{
+			<div class="text-center my-xl-3">
+				<h3 class="bg-warning-subtle text-emphasis-warning ">В списке избранного еще нет товаров</h3>
+				<a class="btn btn-outline-primary my-xl-3" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-left-circle"> На главную</i></a>
+			</div>
+		}
+		else
+		{
+			<h4 class="bg-warning-subtle text-emphasis-warning my-4">Избранное</h4>
+			<div class="row my-4">
+				@foreach (var product in Model)
+				{
+					<div class="col-lg-4 col-md-5 mb-4">
+						<div class="card box-shadow h-100 w-100">
+							<a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+								<div class="scale p-2">
+									<img class="card-img-top rounded mx-auto d-block w-100 h-100 scale" src="@product.ImageLink" alt="Изображение товара">
+								</div>
+							</a>
+							<div class="card-body">
+								<p class="card-title">
+									<a class="titleName" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id"><p class="gain-left">@product.Name</a>
+								</p>
+								<p class="textDescription">
+									<b>Цвет:</b>&#8194;@product.Characteristics.Color<br />
+									<b>Полифония:</b>&#8194;@product.Characteristics.Polyphony<br />
+									<b>Тембры:</b>&#8194;@product.Characteristics.Timbers<br />
+									<b>Мощность:</b>&#8194;@product.Characteristics.Power
+								</p>
+								<h5 class="price">@string.Format("{0:0.##}",product.Cost) &#8381;</h5>
+							</div>
+							<div class="d-flex flex-wrap align-items-end justify-content-around p-2">
+								<a class="btn btn-success flex-fill m-1" asp-controller="Basket" asp-action="Add" asp-route-productId="@product.Id"><i class="bi bi-cart-plus"></i>В корзину</a>
+								<a class="btn btn-outline-warning flex-fill m-1" title="Сравнить" asp-controller="Compare" asp-action="Add" asp-route-productId="@product.Id"><i class="bi bi-bookmarks"></i></a>
+								<a class="btn btn-danger flex-fill m-1" title="Удалить" asp-controller="Favorite" asp-action="Delete" asp-route-productId="@product.Id"><i class="bi bi-trash-fill"></i></a>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+			<div class="text-center">
+				<a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-left-circle"> Продолжить покупки</i></a>
+				<a class="btn btn-outline-danger" title="Очистить" asp-controller="Favorite" asp-action="Clear"><i class="bi bi-x-circle"> Очистить избранное</i></a>
+			</div>
+		}
+	</div>
+</div>

@@ -1,0 +1,54 @@
+﻿@model List<ProductViewModel>;
+
+<div class="row">
+	<div class="col-lg-12 my-4">
+		@if (Model is null || !Model.Any())
+		{
+			<div class="text-center my-xl-3">
+				<h3 class="bg-warning-subtle text-emphasis-warning ">В списке сравнения еще нет товаров</h3>
+				<a class="btn btn-outline-primary my-xl-3" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-left-circle"> К покупкам</i></a>
+			</div>
+		}
+		else
+		{
+			<div class="my-4">
+				<h4 class="bg-warning-subtle text-emphasis-warning">Сравнение</h4>
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th class="col-4">Название</th>
+							<th class="col-2">Цена</th>
+							<th class="col-1">Цвет</th>
+							<th class="col-1">Полифония</th>
+							<th class="col-1">Тембры</th>
+							<th class="col-1">Мощность</th>
+							<th class="col-2"></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var product in Model)
+						{
+							<tr>
+								<td><a asp-controller="Product" asp-action="Index" asp-route-Id="@product.Id">@product.Name</a></td>
+								<td>@string.Format("{0:0.##}",product.Cost)</td>
+								<td>@product.Characteristics.Color</td>
+								<td>@product.Characteristics.Polyphony</td>
+								<td>@product.Characteristics.Timbers</td>
+								<td>@product.Characteristics.Power</td>
+								<td class="text-end">
+									<a type="button" class="btn btn-danger" asp-controller="Compare" asp-action="Delete" asp-route-productId="@product.Id"><i class="bi bi-trash-fill"></i></a>
+									<a class="btn btn-success" title="Добавить в корзину" asp-controller="Basket" asp-action="Add" asp-route-productId="@product.Id"><i class="bi bi-cart"></i></a>
+									<a class="btn btn-outline-danger flex-fill m-1" title="Добавить в избранное" asp-controller="Favorite" asp-action="Add" asp-route-productId="@product.Id"><i class="bi bi-heart"></i></a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+				<div class="text-center">
+					<a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-left-circle"> Продолжить покупки</i></a>
+					<a class="btn btn-outline-danger" title="Очистить" asp-controller="compare" asp-action="clear"><i class="bi bi-x-circle"> Очистить сравнение</i></a>
+				</div>
+			</div>
+		}
+	</div>
+</div>

@@ -1,0 +1,76 @@
+﻿﻿<header class="p-2 bg-dark sticky-top">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <div class="d-flex flex-wrap justify-content-center align-items-center">
+                <ul class="nav col-12 col-lg-auto my-2 my-md-0 text-small text-center">
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white">
+                            <i class="bi d-block mx-auto mb-1 bi-house"></i>
+                            <p class="change-text gain-center">Главная</p>
+                        </a>
+                    </li>
+                    @if (User.IsInRole(Constants.AdminRoleName))
+                    {
+                        <li>
+                            <a asp-area="Admin" asp-controller="Order" asp-action="GetOrders" class="nav-link text-white">
+                                <i class="bi d-block mx-auto mb-1 bi bi-person-fill-gear"></i>
+                                <p class="change-text gain-center">Администратор</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-center">
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-inline-flex" role="search" method="post">
+                    <input name="name" type="search" class="form-control form-control-dark text-bg-dark" placeholder="Поиск..." aria-label="Search">
+                    <button class="btn btn-dark ms-1" type="submit" asp-area="" asp-controller="Home" asp-action="Search"><i class="bi bi-search"></i></button>
+                </form>
+            </div>
+
+            <div class="d-flex">
+                @if (User.Identity.IsAuthenticated)
+                {         
+                    <a class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img style="border-radius: 50%;" src="@await Component.InvokeAsync("Avatar")" width="50" height="50" />
+                        <i class="text-white"> @User.Identity.Name.Split("@")[0]</i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" asp-area = "" asp-controller="User" asp-action="Index">Личный кабинет</a>
+                        <a class="dropdown-item" asp-area= "" asp-controller="User" asp-action="UserOrders">Мои заказы</a>
+                        <a class="dropdown-item" asp-area= "" asp-controller="Auth" asp-action="Logout">Выйти</a>
+                    </div>
+                }
+                else
+                {
+                
+                    <a type="button" class="btn btn-outline-light flex-fill m-1" asp-area="" asp-controller="Auth" asp-action="Enter">Войти</a>
+                    <a type="button" class="btn btn-outline-info flex-fill m-1" asp-area="" asp-controller="Auth" asp-action="Register">Регистрация</a>
+                }
+            </div>     
+ 
+            <div class="d-flex flex-wrap justify-content-center align-items-center">
+                <ul class="nav col-12 col-lg-auto my-2 my-md-0 text-small text-center">
+                    <li>
+                        <a asp-area="" asp-controller="Favorite" asp-action="Index" class="nav-link text-white">
+                            <i class="bi d-block mx-auto mb-1 bi-heart"><span class="badge rounded-pill">@await Component.InvokeAsync("Favorite")</span></i>
+                            <p class="change-text gain-center">Избранное</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Compare" asp-action="Index" class="nav-link text-white">
+                            <i class="bi d-block mx-auto mb-1 bi bi-bookmarks"><span class="badge rounded-pill">@await Component.InvokeAsync("Compare")</span></i>
+                            <p class="change-text gain-center">Сравнение</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Basket" asp-action="Index" class="nav-link text-white">
+                            <i class="bi d-block mx-auto mb-1 bi-cart4"><span class="badge rounded-pill">@await Component.InvokeAsync("Basket")</span></i>
+                            <p class="change-text gain-center">Корзина</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

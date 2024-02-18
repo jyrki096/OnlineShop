@@ -1,0 +1,53 @@
+﻿@model Register
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="my-4">
+            @await Html.PartialAsync("LeftMenu")
+        </div>
+    </div>
+
+    <div class="col-lg-9 my-4">
+        <form method="post" enctype="multipart/form-data">
+            <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+            <div class="col-12 g-3">
+                <h4 class="bg-warning-subtle text-emphasis-warning">Cоздание нового пользователя</h4>
+                <div class="col-9 my-3">
+                    <label asp-for="Login">Логин*</label>
+                    <input type="email" asp-for="Login" class="form-control"/>
+                </div>   
+
+                <div class="col-9 my-3">
+                    <label asp-for="Name">Имя*</label>
+                    <input type="text" asp-for="Name" class="form-control" />
+                </div>
+
+                <div class="col-9 my-3">					
+					<label asp-for="PhoneNumber">Номер телефона*</label>
+                    <input asp-for="PhoneNumber" type="text" class="form-control">
+				</div>
+
+                <div class="col-9 my-3">
+                    <label name="upPhoto">Фото</label>
+                    <input type="file" class="form-control" name="UpPhoto" />
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="Password">Пароль*</label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="PasswordConfirmation">Повторение пароля*</label>
+                    <input type="password" asp-for="PasswordConfirmation" class="form-control" />
+                </div>     
+           
+                <div class="col-9 my-3">
+                    <button class="btn btn-info" type="submit" asp-area="Admin" asp-controller="User" asp-action="CreateUser">Добавить</button>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="User" asp-action="GetUsers">Отмена</a>
+                </div>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,48 @@
+﻿@model UserViewModel
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="my-4">
+            @await Html.PartialAsync("LeftMenu")
+        </div>
+    </div>
+
+    <div class="col-lg-9 my-4">
+        <form method="post">
+            <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+            <div class="col-12 g-3">
+                <h4 class="bg-warning-subtle text-emphasis-warning">Редактирование пользователя</h4>
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="Email" value="@Model.Login" />
+                <input type="hidden" name="Image" value="@Model.Image" />
+
+                <div class="col-9 my-3">
+                    <label asp-for="Login">Логин*</label>
+                    <input type="email" asp-for="Login" class="form-control" value="@Model.Login"/>
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="Name">Имя*</label>
+                    <input type="text" asp-for="Name" class="form-control" value="@Model.Name"/>
+                </div>
+
+                <div class="col-9 my-3">
+                    <label name="Image">Фото</label>
+                    <input type="file" class="form-control" name="UpPhoto" />
+                </div>
+
+                <div class="col-9 my-3">
+                    <label asp-for="Name">Номер телефона*</label>
+                    <input type="text" asp-for="PhoneNumber" class="form-control" value="@Model.PhoneNumber"/>
+                </div>
+
+                <div class="col-9 my-3">
+                    <button class="btn btn-info" type="submit" asp-area="Admin" asp-controller="User" asp-action="EditUser">Сохранить</button>
+                    <a class="btn btn-danger" role="button" asp-area="Admin" asp-controller="User" asp-action="GetUserDetails" asp-route-userId="@Model.Id">Отмена</a>
+                </div>
+        </form>
+    </div>
+</div>
+
+
+

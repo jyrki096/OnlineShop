@@ -1,0 +1,51 @@
+﻿@model List<OrderViewModel>
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="my-4">
+            @await Html.PartialAsync("LeftMenu")
+        </div>
+    </div>
+
+    <div class="col-lg-9 my-4">
+
+        @if (Model is null || !Model.Any())
+        {
+            <div class="text-center my-xl-5">
+                <h3 class="bg-warning-subtle text-emphasis-warning ">Список заказов пуст</h3>
+            </div>
+        }
+        else
+        {
+            <div class="my-4">
+                <h4 class="bg-warning-subtle text-emphasis-warning">Список заказов</h4>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <th>№</th>
+                    <th>Сумма</th>
+                    <th>Статус</th>
+                    <th>Пользователь (логин)</th>
+                    <th>Дата создания заказа</th>
+                    <th>Время создания заказа</th>
+                    <th />
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@string.Format("{0:0.##}",Model[i].Cost)</td>
+                                <td>@EnumHelper.GetDisplayName(Model[i].Status)</td>
+                                <td>@Model[i].Email</td>
+                                <td>@Model[i].CreatedDate.ToString("d")</td>
+                                <td>@Model[i].CreatedDate.ToString("t")</td>
+                                <td><a asp-area="Admin" asp-controller="Order" asp-action="GetOrderDetails" asp-route-orderid="@Model[i].Id">Подробнее</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

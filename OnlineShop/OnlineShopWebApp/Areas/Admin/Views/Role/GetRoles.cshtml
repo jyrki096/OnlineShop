@@ -1,0 +1,51 @@
+﻿@model List<IdentityRole>
+
+<div class="row">
+	<div class="col-lg-3">
+		<div class="my-4">
+			@await Html.PartialAsync("LeftMenu")
+		</div>
+	</div>
+
+	<div class="col-lg-9 my-4">
+		<h4 class="bg-warning-subtle text-emphasis-warning">Список ролей</h4>
+		<a class="btn btn-outline-info" asp-area="Admin" asp-controller="Role" asp-action="AddRole"><i class="bi bi-database-add"> Добавить роль</i></a>
+
+		@if (Model is null || !Model.Any())
+		{
+			<div class="text-center my-xl-5">
+				<h3 class="bg-warning-subtle text-emphasis-warning ">Список ролей пуст</h3>
+			</div>
+		}
+		else
+		{
+			<div class="my-4">	
+				<table class="table table-striped table-hover">
+                    <thead>
+                        <th>№</th>
+                        <th>Название</th>
+                        <th />
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model[i].Name</td>
+								@if (Model[i].Name != "Admin")
+								{
+									<td><a class="btn btn-outline-danger" asp-area="Admin" asp-controller="Role" asp-action="RemoveRole" asp-route-roleId="@Model[i].Id">Удалить</a></td>
+								}
+								else
+								{
+									<td><button class="btn btn-outline-danger" asp-area="Admin" asp-controller="Role" asp-action="RemoveRole" asp-route-roleId="@Model[i].Id" disabled>Удалить</button></td>
+								}
+							</tr>
+                        }
+                    </tbody>
+				</table>
+			</div>
+		}
+	</div>
+</div>
