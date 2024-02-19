@@ -14,6 +14,8 @@
   <li>ASP.NET</li>
   <li>HTML & CSS</li>
   <li>LINQ</li>
+  <li>SQL</li>
   <li>Entity Framework</li>
   <li>MVC архитектура</li>
+  <li>Асинхронный код</li>
 </ul>
