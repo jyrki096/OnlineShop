@@ -20,3 +20,4 @@
   <li>Асинхронный код</li>
 </ul>
 <h2>Изображения</h2>
+<img src="https://postimg.cc/3dhGT74b][img]https://i.postimg.cc/3dhGT74b/Screenshot-164.png">
